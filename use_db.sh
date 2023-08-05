@@ -1,11 +1,12 @@
 
-
+# check if entery is not empty and not more than one
 if [ $# -ne 1 ]
 then
     echo "Invalid number of arguments"
     exit
 fi
 
+# check if database exists
 if [ ! -d $1 ]
 then
     echo "Database Not exists"
@@ -15,7 +16,6 @@ then
 fi
 
 # check if first character is a letter
-
 if [[ $1 =~ ^[a-zA-Z] ]]
 then
     :
@@ -32,6 +32,7 @@ then
     exit
 fi
 
+# change directory to the database directory
 cd $1 
 
 PS3="myhaggag - $1 >>> "
@@ -39,7 +40,7 @@ PS3="myhaggag - $1 >>> "
 echo "You are now using $1 database"
 
 
-select choice in "Create Table" "Drop Table" "Select Table" "Exit to main menu"
+select choice in "Create Table" "Drop Table" "Select Table" "Show Tables" "Exit to main menu"
 do
     case $choice in
 
@@ -58,6 +59,9 @@ do
             read -r tablename
             ./select_tb.sh $tablename
             ;;
+        "show tables")
+            ./show_tb.sh
+            ;;    
         "Exit to main menu")
             cd ..
             exit
