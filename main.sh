@@ -1,8 +1,11 @@
 #! /usr/bin/bash
 
+
+
 ## this is the main script that will be used to run the project
 PS3="myhaggag - main menu >>> "
-
+red='\033[31m'
+reset='\033[0m'
 
 select choice in "Create Database" "Use Database" "Show Databases" "Drop Database" "Exit"
 do
@@ -29,7 +32,7 @@ do
             exit
             ;;
         *)
-            echo "Invalid choice please choose from the following:"
+            echo $red"Invalid choice please choose from the following:"$reset
 
             
             echo "

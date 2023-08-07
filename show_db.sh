@@ -1,10 +1,11 @@
 # show databases and check if there are any databases with extension .hgdb
 
-
+red='\033[31m'
+reset='\033[0m'
 
 if [ -z "$(ls | grep *.hgdb )"  ] ; then
 
-    echo "No databases found"
+    echo $red"No databases found"$reset
     exit    
 fi
 
