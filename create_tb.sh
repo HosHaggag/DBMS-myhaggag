@@ -5,17 +5,11 @@
 
 function set_primary_key {
 
-    select pk in $(cat $tbname".hgtb.config" | cut -d ":" -f 1); do
+    select pk in $(cat $tbname".hgtb.config" | cut -d ":" -f 1) "exit"; do
 
         if [ $pk = "exit" ]
         then
             exit
-        fi
-
-        if [[ ! $pk =~ ^[a-zA-Z][a-zA-Z0-9_]*$ ]]
-        then
-            echo -e $red"Syntax is incorrect, column name must start with a letter and can contain only letters, numbers and underscores"$reset
-            continue 1
         fi
 
         if [[ ! $(cat $tbname".hgtb.config" | cut -d ":" -f 1) ]]
@@ -24,35 +18,14 @@ function set_primary_key {
             continue 1
         fi
 
+        echo $pk >> $tbname".hgtb.config"
+
+
+
+
         break
        
     done
-
-   
-
-
-    read -r -p "Enter the name of the column you want to be the primary key, enter exit to back to main menu" pk
-    if [ $1 = "exit" ]
-    then
-        exit
-    fi
-
-    if [[ ! $1 =~ ^[a-zA-Z][a-zA-Z0-9_]*$ ]]
-    then
-        echo -e $red"Syntax is incorrect, column name must start with a letter and can contain only letters, numbers and underscores"$reset
-        continue 1
-    fi
-
-    if [[ ! $(cat $tbname".hgtb.config" | grep -w $pk) ]]
-    then
-        echo -e $red"Column name is incorrect, enter exit to back to main menu "$reset
-        continue 1
-    fi
-
-    echo $pk >> $tbname".hgtb.config"
-
-    
-
     
 }
 
@@ -67,6 +40,21 @@ green='\033[32m'
 reset='\033[0m'
 
 # end of color variables
+
+# check if the database exists
+
+if [[ ! $1 = *.hgdb ]];then
+    set -- "$1.hgdb"
+    echo $1
+fi
+
+
+
+if [ ! -d $1 ]
+then
+    echo -e $red"Database does not exist"$reset
+    exit
+fi
 
 
 # create table script
@@ -85,6 +73,13 @@ then
 fi
 
 
+if [ -f $tbname".hgtb" ]
+then
+    echo -e $red"Table already exists"$reset
+    continue 1
+fi
+
+
 if [[ ! $tbname =~ ^[a-zA-Z][a-zA-Z0-9_]*$ ]]
 then
     echo -e $red"Syntax is incorrect, table name must start with a letter and can contain only letters, numbers and underscores, enter exit to back to main menu "$reset
@@ -94,15 +89,16 @@ fi
 
 if [ -f $tbname".hgtb" ]
 then
-    echo $red"Table already exists"$reset
+    echo -e $red"Table already exists"$reset
     continue 1
 else
     touch $tbname".hgtb"
     touch $tbname".hgtb.config"
     read -r -p "Enter the number of columns: " colnum
     for (( i = 0; i < colnum; i++ )); do
+        coltype=""
         read -r -p "Enter the name of column $((i+1)): " colname
-        read -r -p "Enter the datatype of column  $((i+1)): " coltype
+        echo  "Enter the datatype of column  $((i+1)): "
         select coltype in "string" "integer"; do
             case $coltype in
                 string ) coltype="string"; break;;
@@ -110,9 +106,9 @@ else
                 * ) echo "Please choose 1 or 2";;
             esac
         done
-        echo -n "$colname:$coltype:" >> $tbname".hgtb.config"
+        echo -n -e "\n$colname:$coltype:" >> $tbname".hgtb.config"
     done
-    echo $green"Table created successfully"$reset
+    echo -e $green"Table created successfully"$reset
 fi
 
 
@@ -123,9 +119,9 @@ if [ $ans = "y" ];then
   set_primary_key  $tbname 
 fi
 
-read -r -p "do you want to create another table? (y/n) \c" cont
-if [ $ans = "n" ];then
-  break
+read -r -p "do you want to create another table? (y/n)" cont
+if [ $cont = "n" ];then
+  exit
 fi
 
 
