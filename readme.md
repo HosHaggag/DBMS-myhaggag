@@ -20,18 +20,18 @@ The project consists of 3 main files:
 2. Open the terminal and navigate to the project directory.
 3. Run the command
 
-```
+```bash
 $ chmod +x setup_dbms_project.sh
 $ sudo ./setup_dbms_project.sh
-```bash
+```
 
 to setup the project.
 
 4. Run the command
 
-```
-$ myhaggag
 ```bash
+$ myhaggag
+```
 
 to run the project.
 
