@@ -40,11 +40,23 @@ PS3="myhaggag - $1 >>> "
 echo "You are now using $1 database"
 
 
-select choice in "Create Table" "Drop Table" "Select Table" "Show Tables" "Exit to main menu"
-do
-    case $choice in
+while true
+do 
 
-        "Create Table")
+echo "Please choose from the following:"
+  echo "
+            1) Create Table
+            2) Drop Table 
+            3) Select Table
+            4) Exit to main menu"
+            
+
+read -r choice
+
+
+case $choice in
+
+       1 )
             echo "Enter the name of the table: "
             read -r tablename
             ./create_tb.sh $tablename
@@ -67,12 +79,7 @@ do
             exit
             ;;
         *)
-            echo "Invalid choice please choose from the following:"
-            echo "
-            1) Create Table
-            2) Drop Table 
-            3) Select Table
-            4) Exit to main menu"
+            echo -n "Invalid choice "
             ;;
       
     esac

@@ -31,6 +31,13 @@ then
     exit
 fi
 
+# delete the database
+
+if [ -d $1 ]
+then
+    rm -r $1
+    echo "Database deleted successfully"
+fi
 
 
-rm -r $1
+

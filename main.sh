@@ -3,44 +3,51 @@
 
 
 ## this is the main script that will be used to run the project
-PS3="myhaggag - main menu >>> "
-red='\033[31m'
-reset='\033[0m'
+export PS3="myhaggag - main menu >>> "
+export red='\033[31m'
+export reset='\033[0m'
+export root_dir="newf"
 
-select choice in "Create Database" "Use Database" "Show Databases" "Drop Database" "Exit"
-do
-    case $choice in
-        "Create Database")
+
+
+while true 
+do 
+
+echo " 
+1) Create Database
+2) Use Database 
+3) Show Databases
+4) Drop Database 
+5) Exit
+     "
+
+
+read -r choice
+
+ case $choice in
+        1)
             echo "Enter the name of the database: "
             read -r dbname
-            ./create_db.sh $dbname
+            $("./"$root_dir"/create_db.sh" $dbname)
             ;;
-        "Use Database")
+        2)
             echo "Enter the name of the database: "
             read -r dbname
             ./use_db.sh $dbname".hgdb"
             ;;
-        "Show Databases")
+        3)
             ./show_db.sh
             ;;
-        "Drop Database")
+        4)
             echo "Enter the name of the database: "
             read -r dbname
             ./drop_db.sh $dbname
             ;;
-        "Exit")
+        5)
             exit
             ;;
         *)
             echo $red"Invalid choice please choose from the following:"$reset
-
-            
-            echo "
-            1) Create Database
-            2) Use Database 
-            3) Show Databases
-            4) Drop Database 
-            5) Exit"
-            ;;
     esac
+   
 done

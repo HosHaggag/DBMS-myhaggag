@@ -10,17 +10,25 @@ if [ -z "$(ls | grep *.hgdb )"  ] ; then
 fi
 
 
+
+
+
+files="$(ls | grep *.hgdb )"
+
+
+while true
+do
+echo "Please choose from the following:"
+
 for file in "$(ls | grep *.hgdb )"
 do
     echo $file
 done
 
+read -r db
 
 
-select db in $(ls -l | grep *.hgdb | awk '{print $9}' ) "Exit to main menu"
-do
-
-   case $db in
+ case $db in
         "Exit to main menu")
             exit
             ;;
@@ -35,12 +43,7 @@ do
              break
          fi
             ;;
-    esac
+esac
 
-   
-
-   
-
-   
 done
 
