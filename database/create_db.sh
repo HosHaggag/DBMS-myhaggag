@@ -2,6 +2,11 @@
 # Create database
 
 
+
+
+echo "Creating database"
+
+echo $PWD
 if [ $# -ne 1 ]
 then
     echo "Invalid number of arguments"
@@ -36,4 +41,10 @@ new_name=$1".hgdb"
 
 mkdir $new_name
 
-./use_db.sh $new_name
+echo "Database created successfully"
+echo $PWD
+
+$root_dir/database/use_db.sh $new_name
+
+
+

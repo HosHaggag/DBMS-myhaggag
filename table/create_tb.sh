@@ -32,33 +32,17 @@ function set_primary_key {
 # end of functions
 
 
-
-
-# color variables
-red='\033[31m'
-green='\033[32m'
-reset='\033[0m'
-
-# end of color variables
-
 # check if the database exists
+set -x
+ls 
 
-if [[ ! $1 = *.hgdb ]];then
-    set -- "$1.hgdb"
-    echo $1
-fi
-
+echo $PWD
 
 
-if [ ! -d $1 ]
-then
-    echo -e $red"Database does not exist"$reset
-    exit
-fi
+
 
 
 # create table script
-cd $1
 
 while true 
 do 
@@ -128,4 +112,4 @@ fi
 done
 
 
-
+set +x

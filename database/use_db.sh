@@ -1,5 +1,6 @@
 
 # check if entery is not empty and not more than one
+
 if [ $# -ne 1 ]
 then
     echo "Invalid number of arguments"
@@ -11,7 +12,7 @@ if [ ! -d $1 ]
 then
     echo "Database Not exists"
     echo "Please choose from the following databases:"
-    ./show_db.sh
+    $root_dir/database/show_db.sh
     exit
 fi
 
@@ -33,6 +34,7 @@ then
 fi
 
 # change directory to the database directory
+echo "Changing directory to $1"
 cd $1 
 
 PS3="myhaggag - $1 >>> "
@@ -45,10 +47,12 @@ do
 
 echo "Please choose from the following:"
   echo "
-            1) Create Table
-            2) Drop Table 
-            3) Select Table
-            4) Exit to main menu"
+1) Create Table
+2) Drop Table 
+3) Select Table
+4) Show Tables
+5) Exit to main menu
+"
             
 
 read -r choice
@@ -57,30 +61,33 @@ read -r choice
 case $choice in
 
        1 )
+            # echo "Enter the name of the table: "
+            # read -r tablename
+           $root_dir/table/create_tb.sh 
+            ;;
+        2)
             echo "Enter the name of the table: "
             read -r tablename
-            ./create_tb.sh $tablename
+            $root_dir/table/drop_tb.sh $tablename
             ;;
-        "Drop Table")
+        3)
             echo "Enter the name of the table: "
             read -r tablename
-            ./drop_tb.sh $tablename
+            $root_dir/table/select_tb.sh $tablename
             ;;
-        "Select Table")
-            echo "Enter the name of the table: "
-            read -r tablename
-            ./select_tb.sh $tablename
-            ;;
-        "show tables")
-            ./show_tb.sh
+        4)
+            $root_dir/table/show_tb.sh
             ;;    
-        "Exit to main menu")
+        5)
             cd ..
             exit
             ;;
         *)
-            echo -n "Invalid choice "
+            echo -n "Invalid choice please choose from the following: "
             ;;
       
     esac
 done
+
+
+

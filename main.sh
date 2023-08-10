@@ -6,7 +6,7 @@
 export PS3="myhaggag - main menu >>> "
 export red='\033[31m'
 export reset='\033[0m'
-export root_dir="newf"
+export root_dir="/c/Users/hosho/OneDrive/Desktop/DBMS-myhaggag"
 
 
 
@@ -28,20 +28,20 @@ read -r choice
         1)
             echo "Enter the name of the database: "
             read -r dbname
-            $("./"$root_dir"/create_db.sh" $dbname)
+            $root_dir/database/create_db.sh $dbname
             ;;
         2)
             echo "Enter the name of the database: "
             read -r dbname
-            ./use_db.sh $dbname".hgdb"
+             $root_dir/database/use_db.sh $dbname".hgdb"
             ;;
         3)
-            ./show_db.sh
+            $root_dir/database/show_db.sh
             ;;
         4)
             echo "Enter the name of the database: "
             read -r dbname
-            ./drop_db.sh $dbname
+             $root_dir/database/drop_db.sh $dbname
             ;;
         5)
             exit
