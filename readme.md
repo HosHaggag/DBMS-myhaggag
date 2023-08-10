@@ -11,8 +11,8 @@ This project is a simple DBMS using Bash Scripting. It is a simple DBMS that can
 The project consists of 3 main files:
 
 1. `main.sh`: This is the main file that contains the main menu of the DBMS.
-2. `database.sh`: This file contains the functions that are related to the databases.
-3. `table.sh`: This file contains the functions that are related to the tables.
+2. `/database`: This directory contains the files that are related to the databases.
+3. `/table`: This directory contains the files that are related to the tables.
 
 ## How to run the project
 
