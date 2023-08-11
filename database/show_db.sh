@@ -6,7 +6,7 @@
 if ls *.hgdb 1> /dev/null 2>&1; then
     echo 
 else
-    echo "No files with .hgdb extension found in the folder."
+    echo "No Databases found please create one first"
     exit
 fi
 

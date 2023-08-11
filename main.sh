@@ -6,7 +6,7 @@
 export PS3="myhaggag - main menu >>> "
 export red='\033[31m'
 export reset='\033[0m'
-export root_dir="/c/Users/hosho/OneDrive/Desktop/DBMS-myhaggag"
+export root_dir="/home/hossamhaggag/DBMS-myhaggag"
 
 
 
