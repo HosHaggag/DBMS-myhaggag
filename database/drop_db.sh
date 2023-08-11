@@ -7,37 +7,20 @@ then
     exit
 fi
 
+if [[ ! $1 =~ *.hgdb ]];then
+    set -- "$1.hgdb" "$@"
+    echo $1
+fi
+
 if [ ! -d $1 ]
 then
     echo "Database not exists"
     exit
 fi
 
-# check if first character is a letter
+rm -r $1
+echo "Database deleted successfully"
 
-if [[ $1 =~ ^[a-zA-Z] ]]
-then
-    :
-else
-    echo "Invalid database name"
-    exit
-fi
-
-# check if the database full name is valid
-
-if [[ $1 =~ [^a-zA-Z0-9] ]]
-then
-    echo "Invalid database name"
-    exit
-fi
-
-# delete the database
-
-if [ -d $1 ]
-then
-    rm -r $1
-    echo "Database deleted successfully"
-fi
 
 
 

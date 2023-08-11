@@ -6,6 +6,7 @@
 export PS3="myhaggag - main menu >>> "
 export red='\033[31m'
 export reset='\033[0m'
+export green='\033[32m'
 export root_dir="/home/hossamhaggag/DBMS-myhaggag"
 
 
@@ -41,7 +42,7 @@ read -r choice
         4)
             echo "Enter the name of the database: "
             read -r dbname
-             $root_dir/database/drop_db.sh $dbname
+            $root_dir/database/drop_db.sh $dbname
             ;;
         5)
             exit

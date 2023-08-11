@@ -32,15 +32,6 @@ function set_primary_key {
 # end of functions
 
 
-# check if the database exists
-set -x
-ls 
-
-echo $PWD
-
-
-
-
 
 # create table script
 
@@ -56,12 +47,6 @@ then
     exit
 fi
 
-
-if [ -f $tbname".hgtb" ]
-then
-    echo -e $red"Table already exists"$reset
-    continue 1
-fi
 
 
 if [[ ! $tbname =~ ^[a-zA-Z][a-zA-Z0-9_]*$ ]]
@@ -79,9 +64,37 @@ else
     touch $tbname".hgtb"
     touch $tbname".hgtb.config"
     read -r -p "Enter the number of columns: " colnum
+
+    if [[ ! $colnum =~ ^[1-9]+$ ]]
+    then
+        echo -e $red"Syntax is incorrect, number of columns must be a number, enter exit to back to main menu "$reset
+        continue 1
+    fi
+
     for (( i = 0; i < colnum; i++ )); do
+
+        while true
+        do
+            read -r -p "Enter the name of column $((i+1)): " colname
+
+            if [[ $colname = "exit" || $colname = "Exit" ]]; then
+                exit
+            fi
+
+            if [[ $colname =~ [^a-zA-Z0-9_] ]]; then
+                echo -e $red"Invalid column name"$reset
+                continue 1
+            fi
+
+            if [[ $(cat $tbname".hgtb.config" | cut -d ":" -f 1) =~ $colname ]]; then
+                echo -e $red"Column name already exists"$reset
+                continue 1
+            fi
+
+            break
+            
+        done
         coltype=""
-        read -r -p "Enter the name of column $((i+1)): " colname
         echo  "Enter the datatype of column  $((i+1)): "
         select coltype in "string" "integer"; do
             case $coltype in
@@ -90,7 +103,7 @@ else
                 * ) echo "Please choose 1 or 2";;
             esac
         done
-        echo -n -e "\n$colname:$coltype:" >> $tbname".hgtb.config"
+        echo "$colname:$coltype" >> $tbname".hgtb.config"
     done
     echo -e $green"Table created successfully"$reset
 fi
@@ -112,4 +125,3 @@ fi
 done
 
 
-set +x

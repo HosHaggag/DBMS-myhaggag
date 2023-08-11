@@ -17,7 +17,12 @@ The project consists of 3 main files:
 ## How to run the project
 
 1. Clone the project to your local machine.
-2. Open the terminal and navigate to the project directory.
+
+```bash
+$ git clone https://github.com/HosHaggag/DBMS-myhaggag.git 
+```
+
+2. navigate to the project directory.
 3. Run the command
 
 ```bash

@@ -16,22 +16,6 @@ then
     exit
 fi
 
-# check if first character is a letter
-if [[ $1 =~ ^[a-zA-Z] ]]
-then
-    :
-else
-    echo "Invalid database name 3"
-    exit
-fi
-
-# check if the database full name is valid and contains only .hgdb extension.
-
-if [[  $1 =~ [^a-zA-Z0-9[.]] ]]
-then
-    echo "Invalid database name 4"
-    exit
-fi
 
 # change directory to the database directory
 echo "Changing directory to $1"

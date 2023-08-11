@@ -11,10 +11,12 @@ reset='\033[0m'
 
 # check if the database exists
 
-if [[ ! $1 = *.hgdb ]];then
-    set -- "$1.hgdb"
+if [[ ! $1 =~ *.hgdb ]];then
+    set -- "$1.hgdb" "$@"
     echo $1
 fi
+
+
 
 if [ ! -d $1 ]
 then
