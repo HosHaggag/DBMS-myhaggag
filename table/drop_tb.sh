@@ -21,8 +21,8 @@ while true; do
 
         # delete the table
 
-        rm $1/$tbname".hgtb"
-        rm $1/$tbname".hgtb.config"
+        rm $$tbname".hgtb"
+        rm $tbname".hgtb.config"
         echo -e $green"Table deleted successfully"$reset
         break
     else

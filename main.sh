@@ -7,6 +7,7 @@ export PS3="myhaggag - main menu >>> "
 export red='\033[31m'
 export reset='\033[0m'
 export green='\033[32m'
+export yellow='\033[33m'
 export root_dir="/home/hossamhaggag/DBMS-myhaggag"
 
 clear

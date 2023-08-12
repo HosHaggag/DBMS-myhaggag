@@ -51,7 +51,7 @@ read -r choice
 
 case $choice in
 
-       1 )
+        1)
            $root_dir/table/create_tb.sh 
             ;;
         2)
@@ -75,6 +75,7 @@ case $choice in
       
     esac
 done
+
 
 
 

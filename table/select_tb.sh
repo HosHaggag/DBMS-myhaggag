@@ -18,7 +18,10 @@ export num_of_cols=$(cat $1".hgtb.config" | grep : | wc -l)
 export num_of_skip_cols=$(cat $1".hgtb.config" | grep -v : | wc -l)
 
 echo "cols: "$num_of_cols
-echo "primary: "$num_of_skip_cols
+echo primary: $(cat $1".hgtb.config" | grep -v : )
+
+
+
 
 
 
