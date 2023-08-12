@@ -56,20 +56,28 @@ then
 fi
 
 
-if [ -f $tbname".hgtb" ]
+if [ -f $tbname".hgtb" -o -f $tbname".hgtb.config" ]
 then
     echo -e $red"Table already exists"$reset
     continue 1
 else
     touch $tbname".hgtb"
     touch $tbname".hgtb.config"
-    read -r -p "Enter the number of columns: " colnum
+
+    while true
+    do
+
+    read -rp "Enter the number of columns: " colnum
 
     if [[ ! $colnum =~ ^[1-9]+$ ]]
     then
         echo -e $red"Syntax is incorrect, number of columns must be a number, enter exit to back to main menu "$reset
         continue 1
     fi
+
+    break
+
+    done
 
     for (( i = 0; i < colnum; i++ )); do
 
@@ -81,8 +89,8 @@ else
                 exit
             fi
 
-            if [[ $colname =~ [^a-zA-Z0-9_] ]]; then
-                echo -e $red"Invalid column name"$reset
+            if [[ ! $colname =~ ^[a-zA-Z][a-zA-Z0-9_]*$ ]]; then
+                echo -e $red"Syntax is incorrect, column name must start with a letter and can contain only letters, numbers and underscores, enter exit to back to main menu "$reset
                 continue 1
             fi
 
@@ -95,17 +103,33 @@ else
             
         done
         coltype=""
+
+        while true 
+        do 
         echo  "Enter the datatype of column  $((i+1)): "
-        select coltype in "string" "integer"; do
-            case $coltype in
-                string ) coltype="string"; break;;
-                integer ) coltype="integer"; break;;
-                * ) echo "Please choose 1 or 2";;
-            esac
-        done
+
+        echo "1) string"
+        echo "2) integer"
+
+        read -r -p "Enter your choice: " choice
+
+        case $choice in
+            1)
+                coltype="string"
+                ;;
+            2)
+                coltype="integer"
+                ;;
+            *)
+                echo -e $red"Syntax is incorrect, enter exit to back to main menu "$reset
+                continue 1
+                ;;
+        esac
         echo "$colname:$coltype" >> $tbname".hgtb.config"
+        break
+        done
     done
-    echo -e $green"Table created successfully"$reset
+    echo "Table created successfully"
 fi
 
 

@@ -9,7 +9,6 @@ fi
 
 if [[ ! $1 =~ *.hgdb ]];then
     set -- "$1.hgdb" "$@"
-    echo $1
 fi
 
 if [ ! -d $1 ]

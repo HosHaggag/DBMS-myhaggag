@@ -3,34 +3,20 @@
 
 
 
-PS3="myhaggag - $1 >>> "
+if ls *.hgtb.config 1> /dev/null 2>&1; then
+    echo 
+else
+    echo "No Tables found please create one first"
+    exit
+fi
 
-echo "You are now using $1 database"
 
+echo "$1 Tables:"
+echo "---------------------"
 
-for file in $(ls | grep *.hgtb)
-do
-    echo "$file"
-done
-
-echo "Please choose from the following:"
-
-select tb in $(ls | grep *.hgtb.config | cut -d . -f 1 ) "exit"
-do
-    if [ $tb = "exit" ]
-    then
-        exit
-    fi
-
-    if [[ ! $(ls | grep *.hgtb) ]]
-    then
-        echo "Table name is incorrect, enter exit to back to main menu "
-        continue 1
-    fi
-
-    echo "You are now using $tb table"
-
-    break
+for file in $(ls -l "$PWD" | grep ".hgtb.config" | awk '{print $9}' | cut -d "." -f 1); do
+    printf "%-20s|\n" "$file"
+echo "---------------------"
 done
 
 

@@ -6,7 +6,7 @@ then
     exit
 fi
 
-if [ ! -f $1".hgtb" ]
+if [ ! -f $1".hgtb" -o ! -f $1".hgtb.config" ]
 then
     echo "Table is not exist"
     exit
@@ -58,6 +58,5 @@ case $choice in
         ;;
 esac
 
-   
 
 done

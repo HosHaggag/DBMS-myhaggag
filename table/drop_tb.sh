@@ -1,29 +1,5 @@
 #! /usr/bin/bash
 
-
-
-# color variables
-red='\033[31m'
-green='\033[32m'
-reset='\033[0m'
-
-# end of color variables
-
-# check if the database exists
-
-if [[ ! $1 =~ *.hgdb ]];then
-    set -- "$1.hgdb" "$@"
-    echo $1
-fi
-
-
-
-if [ ! -d $1 ]
-then
-    echo -e $red"Database does not exist"$reset
-    exit
-fi
-
 # check if the table name is valid
 
 while true; do
@@ -39,12 +15,14 @@ while true; do
     fi
 
 
-    if [ -f $1/$tbname".hgtb" ]
+
+    if [ -f $tbname".hgtb"  -a -f $tbname".hgtb.config" ]
     then
 
         # delete the table
 
         rm $1/$tbname".hgtb"
+        rm $1/$tbname".hgtb.config"
         echo -e $green"Table deleted successfully"$reset
         break
     else

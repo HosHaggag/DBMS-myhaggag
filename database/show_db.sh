@@ -9,11 +9,12 @@ else
 fi
 
 
+echo "Databases:"
+echo "---------------------"
 
-for file in "$( ls -F $PWD | grep ".hgdb" | cut -d . -f 1 )"
-do
-    echo "$file"
-    echo "---- "
+for file in $(ls -l "$PWD" | grep ".hgdb" | awk '{print $9}' | cut -d "." -f 1); do
+    printf "%-20s|\n" "$file"
+echo "---------------------"
 done
 
 
