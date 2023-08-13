@@ -60,7 +60,7 @@ case $choice in
         3)
             echo "Enter the name of the table: "
             read -r tablename
-            $root_dir/table/select_tb.sh $tablename
+            $root_dir/table/select_tb.sh $tablename 
             ;;
         4)
             $root_dir/table/show_tb.sh $1

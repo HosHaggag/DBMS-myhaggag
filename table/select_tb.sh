@@ -6,19 +6,35 @@ then
     exit
 fi
 
+
 if [ ! -f $1".hgtb" -o ! -f $1".hgtb.config" ]
 then
     echo "Table is not exist"
     exit
 fi
 
+PS3="myhaggag >> "
+
 # get the number of columns
 
 export num_of_cols=$(cat $1".hgtb.config" | grep : | wc -l)
 export num_of_skip_cols=$(cat $1".hgtb.config" | grep -v : | wc -l)
 
+export array_of_cols=( $(cat $1".hgtb.config" | grep : | cut -d ":" -f 1) )
+export array_of_types=( $(cat $1".hgtb.config" | grep : | cut -d ":" -f 2) )
+
+if [ ! $(cat $1".hgtb.config" | grep -v : ) ];then
+    echo "No primary key found"
+    else
+export primary_key=$(cat $1".hgtb.config" | grep -v : )
+export primary_key_index=$(cat $1".hgtb.config" | grep : | cut -d ":" -f 1 | grep -n $primary_key | cut -d ":" -f 1)
+fi
+
+
+
+
 echo "cols: "$num_of_cols
-echo primary: $(cat $1".hgtb.config" | grep -v : )
+echo primary: $primary_key
 
 
 
@@ -51,7 +67,7 @@ case $choice in
         $root_dir/table/update_tb.sh $1
         ;;
     4)
-        $root_dir/table/show_tb.sh $1
+        $root_dir/table/show_selected_tb.sh $1
         ;;
     5)
         exit

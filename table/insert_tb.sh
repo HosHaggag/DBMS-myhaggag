@@ -1,8 +1,6 @@
 #! /usr/bin/bash
 
-array_of_cols=( $(cat $1".hgtb.config" | grep : | cut -d ":" -f 1) )
-array_of_types=( $(cat $1".hgtb.config" | grep : | cut -d ":" -f 2) )
-primary_key=$(cat $1".hgtb.config" | grep -v : )
+
 
 
 echo cols: $(cat $1".hgtb.config" | grep : | cut -d ":" -f 1 )
