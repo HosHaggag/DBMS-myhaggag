@@ -21,8 +21,8 @@ The project consists of 3 main files:
 3. Run the command
 
 ```bash
-$ chmod +x setup_dbms_project.sh
-$ sudo ./setup_dbms_project.sh
+$ chmod +x setup.sh
+$ sudo ./setup.sh
 ```
 
 to setup the project.
